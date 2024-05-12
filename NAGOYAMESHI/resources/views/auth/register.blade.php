@@ -24,6 +24,7 @@
                          @enderror
                      </div>
                  </div>
+                 <br>
  
                  <div class="form-group row">
                      <label for="email" class="col-md-5 col-form-label text-md-left">メールアドレス<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></span></label>
@@ -38,6 +39,7 @@
                          @enderror
                      </div>
                  </div>
+                 <br>
  
                  <div class="form-group row">
                      <label for="password" class="col-md-5 col-form-label text-md-left">パスワード<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></span></label>
@@ -52,14 +54,59 @@
                          @enderror
                      </div>
                  </div>
- 
+                 <br> 
                  <div class="form-group row">
-                     <label for="password-confirm" class="col-md-5 col-form-label text-md-left"></label>
+                     <label for="password-confirm" class="col-md-5 col-form-label text-md-left">パスワード（確認用）<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></label>
  
                      <div class="col-md-7">
                          <input id="password-confirm" type="password" class="form-control samuraimart-login-input" name="password_confirmation" required autocomplete="new-password">
                      </div>
                  </div>
+
+
+                 <br>
+                 <div class="form-group row">
+                     <label for="phone" class="col-md-5 col-form-label text-md-left">電話番号<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></span></label>
+ 
+                     <div class="col-md-7">
+                         <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror samuraimart-login-input" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="XXX-XXXX-XXXX">
+ 
+                         @error('phone')
+                         <span class="invalid-feedback" role="alert">
+                             <strong>電話番号を入力してください</strong>
+                         </span>
+                         @enderror
+                     </div>
+                 </div>
+                 <br>
+                 <div class="form-group row">
+                     <label for="occupation" class="col-md-5 col-form-label text-md-left">職業<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></span></label>
+ 
+                     <div class="col-md-7">
+                         <input id="occupation" type="text" class="form-control @error('occupation') is-invalid @enderror samuraimart-login-input" name="occupation" value="{{ old('occupation') }}" required autocomplete="occupation" autofocus placeholder="会社員">
+ 
+                         @error('occupation')
+                         <span class="invalid-feedback" role="alert">
+                             <strong>職業を入力してください</strong>
+                         </span>
+                         @enderror
+                     </div>
+                 </div>
+                 <br>
+                 <div class="form-group row">
+                     <label for="allergy" class="col-md-5 col-form-label text-md-left">アレルギー<span class="ml-1 samuraimart-require-input-label"><span class="samuraimart-require-input-label-text">必須</span></span></label>
+ 
+                     <div class="col-md-7">
+                         <input id="allergy" type="text" class="form-control @error('allergy') is-invalid @enderror samuraimart-login-input" name="allergy" value="{{ old('allergy') }}" required autocomplete="allergy" autofocus placeholder="例：たまご">
+ 
+                         @error('allergy')
+                         <span class="invalid-feedback" role="alert">
+                             <strong>アレルギーを入力してください</strong>
+                         </span>
+                         @enderror
+                     </div>
+                 </div>
+                 <br>
  
                  <div class="form-group">
                      <button type="submit" class="btn samuraimart-submit-button w-100">

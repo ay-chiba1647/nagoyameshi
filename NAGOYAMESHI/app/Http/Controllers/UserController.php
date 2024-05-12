@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Shop;
 use App\Models\Reservation;
 
@@ -82,4 +81,12 @@ class UserController extends Controller
  
          return view('users.favorite', compact('favorite_shops'));
      }
+
+     public function destroy(Request $request)
+     {
+         Auth::user()->delete();
+         return redirect('/');
+     }
+
+
 }

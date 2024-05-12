@@ -13,7 +13,6 @@ class ReservationController extends Controller
        $reservations = Reservation::where('user_id', auth()->id())->get();
        return view('/reservation', compact('reservations'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -27,6 +26,7 @@ class ReservationController extends Controller
         $reservation->time = $request->input('time');
         $reservation->people = $request->input('people');
         $reservation->shop_id = $request->input('shop_id');
+        $reservation->shop_name = $request->input('shop_name');
         $reservation->user_id = Auth::user()->id;
         $reservation->save();
 
@@ -36,6 +36,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
-        return to_route('/reservation');
-    }
+        return redirect()->route('reservations');
+     }
 }

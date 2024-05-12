@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\MajorCategory;
+use App\Models\Shop;
 
 class WebController extends Controller
 {
     public function index()
      {
-         $categories = Category::all()->sortBy('major_category_name');
+        $categories = Category::all();
  
-         $major_category_names = Category::pluck('major_category_name')->unique();
+        $major_categories = MajorCategory::all(); 
+
+        $recently_shops = Shop::orderBy('created_at', 'desc')->take(4)->get();
+        $recommend_shops = Shop::where('recommend_flag', true)->take(3)->get();
  
-         return view('web.index', compact('major_category_names', 'categories'));
+        return view('web.index', compact('major_categories', 'categories', 'recently_shops', 'recommend_shops'));
      }
 }

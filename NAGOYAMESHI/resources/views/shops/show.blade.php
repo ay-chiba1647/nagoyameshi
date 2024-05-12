@@ -5,7 +5,11 @@
  <div class="d-flex justify-content-center">
      <div class="row w-75">
          <div class="col-5 offset-1">
+             @if ($shop->image)
+             <img src="{{ asset($shop->image) }}" class="w-100 img-fluid">
+             @else
              <img src="{{ asset('img/nekocup.jpg')}}" class="w-100 img-fluid">
+             @endif
          </div>
          <div class="col">
              <div class="d-flex flex-column">
@@ -37,6 +41,7 @@
                  @csrf
                  <input type="hidden" name="id" value="{{$shop->id}}">
                  <input type="hidden" name="name" value="{{$shop->name}}">
+                 <input type="hidden" name="image" value="{{$shop->image}}">
                  <input type="hidden" name="price_under" value="{{$shop->price_under}}">
                  <input type="hidden" name="price_over" value="{{$shop->price_over}}">
                  <input type="hidden" name="open_our" value="{{$shop->open_our}}">
@@ -45,7 +50,8 @@
                  <input type="hidden" name="address" value="{{$shop->address}}">
                  <input type="hidden" name="phone" value="{{$shop->phone}}">
                  <input type="hidden" name="holiday" value="{{$shop->holiday}}">               
-             </form>     
+             </form>   
+    @if($member == 1)  
       <div class="row w-75">
         <h2 class="float-left">予約</h2>
         <form method="POST" action="{{ route('reservations.store')}}">
@@ -84,6 +90,8 @@
               <option value="10名">10名</option> 
             </select>
             <input type="hidden" name="shop_id" value="{{$shop->id}}">
+            <input type="hidden" name="shop_name" value="{{$shop->name}}">
+            <input type="hidden" name="image" value="{{$shop->image}}">            
             <div class="me-2 mb-2">
               <button type="submit" class="btn samuraimart-header-search-button"><i class="fa fa-calendar samuraimart-header-search-icon">予約する</i></button>
             </div>
@@ -157,5 +165,10 @@
              @endauth
          </div>
      </div>
+    @else
+     <a class="nav-link" href="{{ route('paid_members.store') }}">
+      <i class="fas fa-thumbs-up"></i><label>有料会員登録</label>
+     </a>
+   @endif
  </div>
  @endsection

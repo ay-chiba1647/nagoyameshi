@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use App\Models\Category;
+use App\Models\MajorCategory;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -17,23 +18,25 @@ class ShopController extends Controller
     {
         $keyword = $request->keyword;
 
-        if ($request->category !== null) {
-            $shops = Shop::where('category_id', $request->category)->sortable()->paginate(5);
-            $total_count = Shop::where('category_id', $request->category)->count();
-            $category = Category::find($request->category);
+        if ($request->major_category !== null) {
+            $shops = Shop::where('category_id', $request->major_category)->sortable()->paginate(5);
+            $total_count = Shop::where('category_id', $request->major_category)->count();
+            $major_category = MajorCategory::find($request->major_category);
         }elseif ($keyword !== null){
             $shops = Shop::where('name', 'like', "%{$keyword}%")->sortable()->paginate(5);
             $total_count = $shops->total();
             $category = null;
+            $major_category = null;
         } else {
             $shops = Shop::sortable()->paginate(5);
             $total_count = "";
             $category = null;
+            $major_category = null;
         }
         $categories = Category::all();
-        $major_category_names = Category::pluck('major_category_name')->unique();
+        $major_categories = MajorCategory::all();
 
-        return view('shops.index', compact('shops','category', 'categories','major_category_names', 'total_count', 'keyword'));
+        return view('shops.index', compact('shops', 'major_category','total_count', 'keyword'));
     }
 
     /**
